@@ -1039,17 +1039,17 @@ var Aff = function () {
   return Aff;
 }();
 
-exports._pure = Aff.Pure;
+export var _pure = Aff.Pure;
 
-exports._throwError = Aff.Throw;
+export var _throwError = Aff.Throw;
 
-exports._catchError = function (aff) {
+export var _catchError = function (aff) {
   return function (k) {
     return Aff.Catch(aff, k);
   };
 };
 
-exports._map = function (f) {
+export var _map = function (f) {
   return function (aff) {
     if (aff.tag === Aff.Pure.tag) {
       return Aff.Pure(f(aff._1));
@@ -1061,33 +1061,33 @@ exports._map = function (f) {
   };
 };
 
-exports._bind = function (aff) {
+export var _bind = function (aff) {
   return function (k) {
     return Aff.Bind(aff, k);
   };
 };
 
-exports._fork = function (immediate) {
+export var _fork = function (immediate) {
   return function (aff) {
     return Aff.Fork(immediate, aff);
   };
 };
 
-exports._liftEffect = Aff.Sync;
+export var _liftEffect = Aff.Sync;
 
-exports._parAffMap = function (f) {
+export var _parAffMap = function (f) {
   return function (aff) {
     return Aff.ParMap(f, aff);
   };
 };
 
-exports._parAffApply = function (aff1) {
+export var _parAffApply = function (aff1) {
   return function (aff2) {
     return Aff.ParApply(aff1, aff2);
   };
 };
 
-exports._parAffAlt = function (aff1) {
+export var _parAffAlt = function (aff1) {
   return function (aff2) {
     return Aff.ParAlt(aff1, aff2);
   };
@@ -1103,13 +1103,13 @@ exports.generalBracket = function (acquire) {
   };
 };
 
-exports._makeFiber = function (util, aff) {
+export var _makeFiber = function (util, aff) {
   return function () {
     return Aff.Fiber(util, null, aff);
   };
 };
 
-exports._makeSupervisedFiber = function (util, aff) {
+export var _makeSupervisedFiber = function (util, aff) {
   return function () {
     var supervisor = Aff.Supervisor(util);
     return {
@@ -1119,11 +1119,11 @@ exports._makeSupervisedFiber = function (util, aff) {
   };
 };
 
-exports._killAll = function (error, supervisor, cb) {
+export var _killAll = function (error, supervisor, cb) {
   return supervisor.killAll(error, cb);
 };
 
-exports._delay = function () {
+export var _delay = function () {
   function setDelay(n, k) {
     if (n === 0 && typeof setImmediate !== "undefined") {
       return setImmediate(k);
@@ -1154,4 +1154,4 @@ exports._delay = function () {
   };
 }();
 
-exports._sequential = Aff.Seq;
+export var _sequential = Aff.Seq;

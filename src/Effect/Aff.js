@@ -1093,9 +1093,9 @@ export var _parAffAlt = function (aff1) {
   };
 };
 
-exports.makeAff = Aff.Async;
+export var makeAff = Aff.Async;
 
-exports.generalBracket = function (acquire) {
+export var generalBracket = function (acquire) {
   return function (options) {
     return function (k) {
       return Aff.Bracket(acquire, options, k);
